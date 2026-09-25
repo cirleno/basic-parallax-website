@@ -1,0 +1,21 @@
+# Include your project-specific ignores in this file
+# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+# Useful .gitignore templates: https://github.com/github/gitignore
+
+# --- Not part of the site ---
+
+# H5BP template documentation. Describes the stock template (including the js/
+# directory this project removed), not this site. See LICENSE.txt for attribution.
+/doc/
+
+# Internal working notes for coding agents, not documentation for site visitors.
+/AGENTS.md
+/.agents/
+
+# --- OS and editor cruft ---
+
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~

@@ -1,0 +1,28 @@
+{
+    "name": "Site com Efeito Parallax",
+    "short_name": "Parallax",
+    "description": "Site de demonstração com efeito parallax, construído com HTML5 e CSS.",
+    "lang": "pt-BR",
+    "dir": "ltr",
+    "icons": [{
+        "src": "icon.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+    }, {
+        "src": "icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+    }, {
+        "src": "icon-maskable-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+    }],
+    "start_url": ".",
+    "scope": ".",
+    "display": "standalone",
+    "background_color": "#f4f4f4",
+    "theme_color": "#282e34"
+}
