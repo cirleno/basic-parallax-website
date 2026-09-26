@@ -2,9 +2,8 @@
 # The humans responsible & technology colophon
 
 # TEAM
-# Intentionally empty: the H5BP template shipped a name/role/twitter
-# placeholder here and it was removed rather than published unfilled.
-# Add yourself under this heading if you ever want to be credited.
+# Intentionally empty. Add yourself under this heading if you ever want
+# to be credited.
 
 # THANKS
 # Intentionally empty.
@@ -12,4 +11,4 @@
 # TECHNOLOGY COLOPHON
 
     CSS3, HTML5
-    Apache Server Configs, Normalize.css
+    Apache Server Configs

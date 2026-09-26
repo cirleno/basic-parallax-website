@@ -1,85 +1,21 @@
-/*! HTML5 Boilerplate v6.0.1 | MIT License | https://html5boilerplate.com/ */
-
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
+/*! Site com Efeito Parallax | derived from HTML5 Boilerplate v6.0.1 | MIT License */
 
 /* ==========================================================================
-   Base styles: opinionated defaults
+   Reset
+   --------------------------------------------------------------------------
+   Nao ha stylesheet de terceiros. A pagina usa apenas a body div h1 h2
+   main p section span, e para esse conjunto o default do navegador ja e o
+   correto. A unica regra que sobra e text-size-adjust, que impede o iOS de
+   inflar o texto quando a pagina e girada para paisagem.
+
+   Se um <form>, <table>, <img> ou audio entrar na pagina, um reset
+   vendorizado passa a ser justificavel - nesse caso adicione-o de proposito
+   e avise, em vez de reintroduzi-lo por reflexo. O audit que motivou a
+   decisao esta no README.
    ========================================================================== */
 
 html {
-    color: #222;
-    font-size: 1em;
-    line-height: 1.4;
-}
-
-/*
- * Remove text-shadow in selection highlight:
- * https://twitter.com/miketaylr/status/12228805301
- *
- * Vendor-prefixed and regular ::selection selectors cannot be combined:
- * https://stackoverflow.com/a/16982510/7133471
- *
- * Customize the background color to match your design.
- */
-
-::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-/*
- * A better looking default horizontal rule
- */
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
-
-/*
- * Remove the gap between audio, canvas, iframes,
- * images, videos and the bottom of their containers:
- * https://github.com/h5bp/html5-boilerplate/issues/440
- */
-
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-    vertical-align: middle;
-}
-
-/*
- * Remove default fieldset styles.
- */
-
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-/*
- * Allow only vertical resizing of textareas.
- */
-
-textarea {
-    resize: vertical;
+    -webkit-text-size-adjust: 100%;
 }
 
 /* ==========================================================================
@@ -189,12 +125,19 @@ body, html {
     }
 }
 
+/* ==========================================================================
+   Selection
+   ========================================================================== */
 
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
 
-
-
-
-
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
 
 /* ==========================================================================
    Helper classes
@@ -221,23 +164,6 @@ body, html {
     position: absolute;
     width: 1px;
     white-space: nowrap; /* 1 */
-}
-
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
-
-@media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
-}
-
-@media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
 }
 
 /* ==========================================================================

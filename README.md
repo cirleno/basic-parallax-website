@@ -105,8 +105,8 @@ Alterações no HTML aparecem na hora.
 index.html              a página única
 404.html
 css/
-  main.css              CSS do projeto (bloco "Author's custom styles")
-  normalize.css         reset vendorizado
+  style.css             todo o CSS: reset de 3 linhas, o projeto, seleção,
+                        .visuallyhidden e o bloco de impressão
 img/
   Hello_World.webp      fundo do .pimg1
   Gramafone.webp        fundo do .pimg2
@@ -124,9 +124,49 @@ site.webmanifest        manifesto PWA
 browserconfig.xml       tiles do Windows
 ```
 
+### O reset: uma linha em vez de um arquivo
+
+O projeto **não usa nenhum stylesheet de terceiros**. O `normalize.css` v7 foi substituído por
+uma regra só, no topo do `style.css`:
+
+```css
+html {
+    -webkit-text-size-adjust: 100%;
+}
+```
+
+A auditoria que motivou a decisão cruzou as ~30 regras do normalize com os elementos que a página
+realmente usa (`a body div h1 h2 main p section span`):
+
+| regra do normalize.css | o que acontece na prática |
+|---|---|
+| `body { margin: 0 }` | duplicata — o bloco do projeto já define |
+| `html { line-height: 1.15 }` | sobrescrito pelo `html { line-height: 1.4 }` do projeto |
+| `section`, `main` → `display: block` | já é o default do navegador |
+| `h1 { font-size: 2em; margin: .67em 0 }` | o `<h1>` é `.visuallyhidden` — clipped, `margin: -1px` |
+| `a { background-color: transparent }` | o `.skip-link` já define `#111` |
+| `img { border-style: none }` | não existe `<img>` no `index.html` |
+| 164 linhas de formulários | não existe um único `<input>`, `<button>` ou `<textarea>` — 37% do arquivo |
+| o resto (tabelas, mídia, listas, `hr`, `pre`, `details`, `[hidden]`…) | nenhum desses elementos existe |
+| **`html { -webkit-text-size-adjust: 100% }`** | **a única regra viva** — anti-inflação de texto no iOS em paisagem |
+
+As 7 regras da base do H5BP (`hr`, `fieldset`, `textarea`, media, `html`) foram pelo mesmo
+caminho — mortas nesta página. `::selection` foi preservada: ela é o único detalhe de UX que o
+boilerplate realmente entrega aqui.
+
+Ganho: **-6.046 bytes crus, -2.500 bytes gzip, uma requisição a menos.** Parte desse ganho é
+remover código morto, parte é o dicionário de compressão agora ser compartilhado num arquivo só.
+
+Isso **não** é uma otimização de performance. As quatro imagens somam 275 KB, então o CSS é
+cerca de 1,6% do peso da página. O motivo é manutenção: 155 linhas de CSS vendor comprovadamente
+morto num projeto de 74 linhas é passivo, não ativo.
+
+Se um dia entrar um `<form>`, `<table>`, `<img>` ou áudio, um reset vendorizado passa a ser
+justificável — nesse caso, adicione-o de propósito e avise. Não volte por reflexo.
+
 Para adicionar um painel novo, o `.pimgN` precisa aparecer em **três** lugares: o bloco HTML,
-a regra de `background-image` em `main.css`, e as **duas** listas de seletores
-compartilhados em `main.css` (a base e a dentro da media query de 568px). Esquecer a
+a regra de `background-image` em `style.css`, e as **duas** listas de seletores
+compartilhados em `style.css` (a base e a dentro da media query de 568px). Esquecer a
 terceira lista e o painel continua aparecendo no celular com o efeito ligado.
 
 ## Acessibilidade
@@ -136,22 +176,21 @@ terceira lista e o painel continua aparecendo no celular com o efeito ligado.
 - link "Pular para o conteúdo" como primeiro elemento focável
 - hierarquia `H1, H2, H2, H2` — um `h1` só
 - anel de foco visível no skip-link
-- `alt` em todas as imagens
+- a página **não tem um único elemento `<img>`**: as quatro fotos são `background-image`, que é
+  decorativo por definição e não aceita `alt`. Todo o texto visível está em `.ptext .border` e
+  nos `<h2>`, então nada depende de texto alternativo. (Se um `<img>` entrar, ele precisa de `alt`.)
 
 ## Compatibilidade
 
-O site depende de dois formatos com requisitos de data similar:
-
 - **WebP** para os fundos, declarados como `background-image` simples, sem `<picture>` nem
   fallback em PNG. Suportado em todos os navegadores atuais.
-- **PNG dentro de ICO** no favicon (Vista/IE11 ou superior), que preserva os pixels exatos
-  sem recomprimir.
+- **PNG dentro de ICO** no favicon, que preserva os pixels exatos sem recomprimir. Os dois
+  quadros (16x16 e 32x32) são PNG embutidos literalmente, não DIB re-codificado.
 
 ## Estado
 
 Projeto de estudo. **As três seções de texto ainda contêm Lorem ipsum** de exemplo — não
-são conteúdo real. As imagens de fundo e o material do ícone são pessoais e foram editados
-para remover uma faixa branca que vinha embutida nas artes.
+são conteúdo real. As imagens de fundo e o material do ícone são pessoais.
 
 ## Licença
 
