@@ -154,12 +154,15 @@ As 7 regras da base do H5BP (`hr`, `fieldset`, `textarea`, media, `html`) foram 
 caminho — mortas nesta página. `::selection` foi preservada: ela é o único detalhe de UX que o
 boilerplate realmente entrega aqui.
 
-Ganho: **-6.046 bytes crus, -2.500 bytes gzip, uma requisição a menos.** Parte desse ganho é
-remover código morto, parte é o dicionário de compressão agora ser compartilhado num arquivo só.
+Ganho: **-8.940 bytes crus, -2.595 bytes gzip, uma requisição a menos** — o payload de CSS foi de
+14.314 para 5.374 bytes e de 4.548 para 1.953 gzip. Parte desse ganho é remover código morto,
+parte é o dicionário de compressão agora ser compartilhado num arquivo só.
 
-Isso **não** é uma otimização de performance. As quatro imagens somam 275 KB, então o CSS é
-cerca de 1,6% do peso da página. O motivo é manutenção: 155 linhas de CSS vendor comprovadamente
-morto num projeto de 74 linhas é passivo, não ativo.
+Isso **não** é uma otimização de performance. As quatro imagens somam 276 KB e respondem por
+94,9% dos 284 KB que o navegador baixa, então o CSS é cerca de 1,8% do peso da página. O motivo
+é manutenção: 447 linhas de `normalize.css` mais as regras base do H5BP eram passivo, não
+ativo. As regras do próprio projeto não mudaram — a limpeza removeu código de terceiros e
+regras sem elemento correspondente, nada mais.
 
 Se um dia entrar um `<form>`, `<table>`, `<img>` ou áudio, um reset vendorizado passa a ser
 justificável — nesse caso, adicione-o de propósito e avise. Não volte por reflexo.

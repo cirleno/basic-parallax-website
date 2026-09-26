@@ -167,9 +167,11 @@ body, html {
 }
 
 /* ==========================================================================
-   Print styles.
-   Inlined to avoid the additional HTTP request:
-   http://www.phpied.com/delay-loading-your-print-css/
+   Print styles
+   --------------------------------------------------------------------------
+   The stock rules for abbr, pre, blockquote, thead, tr and img are gone:
+   this page has none of those elements. What is left is the part that
+   actually changes how this document comes out of a printer.
    ========================================================================== */
 
 @media print {
@@ -192,52 +194,21 @@ body, html {
         content: " (" attr(href) ")";
     }
 
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
+    /* The only link on the page targets a fragment, so printing its href
+       would just print "#conteudo". No javascript: hrefs are possible -
+       the project ships zero script tags. */
 
-    /*
-     * Don't show links that are fragment identifiers,
-     * or use the `javascript:` pseudo protocol
-     */
-
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
+    a[href^="#"]:after {
         content: "";
     }
 
-    pre {
-        white-space: pre-wrap !important;
-    }
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
-
-    /*
-     * Printing Tables:
-     * http://css-discuss.incutio.com/wiki/Printing_Tables
-     */
-
-    thead {
-        display: table-header-group;
-    }
-
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
-
     p,
-    h2,
-    h3 {
+    h2 {
         orphans: 3;
         widows: 3;
     }
 
-    h2,
-    h3 {
+    h2 {
         page-break-after: avoid;
     }
 }
